@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <title>Admin Form</title>
+</head>
+<body>
+    <div class="admin-form-container">
+        <h2>Admin Form</h2>
+        <form id="adminForm">
+            <div class="input-group">
+                <label for="account">Account:</label>
+                <input type="text" id="account" name="account">
+            </div>
+            <div class="input-group">
+                <label for="workOrderNumber">Client Work Order Number:</label>
+                <input type="text" id="workOrderNumber" name="workOrderNumber">
+            </div>
+            <div class="input-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address">
+            </div>
+            <div class="input-group">
+                <label for="customerName">Customer Name:</label>
+                <input type="text" id="customerName" name="customerName">
+            </div>
+            <div class="input-group">
+                <label for="customerContact">Customer Contact:</label>
+                <input type="text" id="customerContact" name="customerContact">
+            </div>
+            <button type="button" id="downloadPdf" class="pdf-button">Download as PDF</button>
+
+        </form>
+    </div>
+</body>
+
+<script>
+    document.getElementById('downloadPdf').addEventListener('click', function() {
+        var doc = new jspdf.jsPDF();
+
+        var account = document.getElementById('account').value;
+        var workOrderNumber = document.getElementById('workOrderNumber').value;
+        var address = document.getElementById('address').value;
+        var customerName = document.getElementById('customerName').value;
+        var customerContact = document.getElementById('customerContact').value;
+
+        doc.text('Account: ' + account, 10, 10);
+        doc.text('Client Work Order Number: ' + workOrderNumber, 10, 20);
+        doc.text('Address: ' + address, 10, 30);
+        doc.text('Customer Name: ' + customerName, 10, 40);
+        doc.text('Customer Contact: ' + customerContact, 10, 50);
+
+        doc.save('admin-form.pdf');
+    });
+</script>
+
+
+</html>
